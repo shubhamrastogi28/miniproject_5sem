@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+    FILE *fp;
+    char ch;
+    printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
+    getch();
+    fp=fopen("mnemonics.txt","r");
+    printf("\n\n------------------MNEMONICS THAT CAN BE USED FOR THE MACHINE:----------------\n\n");
+    while(ch != EOF)
+    {
+        ch=getc(fp);
+        putchar(ch);
+    }
+    fclose(fp);
+}
