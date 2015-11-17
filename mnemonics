@@ -1,0 +1,19 @@
+STO	Store
+
+ADT	Addition
+
+SBT	Subtraction
+
+CPR	Compare
+
+JUM	Jump
+
+LOA	Load_to_accumulator
+
+MTP	Multiply
+
+RBT	Reserve_bytes
+
+RWD	Reserve_words
+
+CED	Code_end.
