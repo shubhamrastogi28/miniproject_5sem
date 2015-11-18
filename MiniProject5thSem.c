@@ -7,11 +7,13 @@ typedef struct segregate
 }seg;
 void main()
 {
-    FILE *fp,*f;
-    seg add[20],label[20],mnemonik[20],operand[20];
-    int i,j,address,o=0,l=0,m=0,r,ctr;
-    int adres[20],length;
-    char c,c2,c3,ch;
+    FILE *fp,*f,*fop,*fsym,*fob_prog,*ftext;
+    seg add[20],label[20],mnemonik[20],operand[20],opr[10],sym[10];
+    int i,j,address,o=0,l=0,m=0,r,ctr,p,q;
+    int adres[20],length,op[10],sm[10];
+    char c,c2,c3,c4,c5,c6,c7,ch;
+    printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
+    getch();
     fp=fopen("mnemonics.txt","r");
     printf("------------------MNEMONICS THAT CAN BE USED FOR THE MACHINE:---------------\n\n");
     while(ch != EOF)
@@ -20,6 +22,8 @@ void main()
         putchar(ch);
     }
     fclose(fp);
+    printf("\n\n---------------------PRESS ENTER TO SEE THE ASSEMBLY CODE:--------------------\n\n");
+    getch();
     f=fopen("assemblycode.txt","r");
     printf("\n\n--------------------------ASSEMBLY CODE IS:----------------------\n\n");
     while(c!=EOF)
@@ -53,7 +57,7 @@ void main()
     fclose(f);
     i=0;
     printf("\n\n-----------------ENTER THE STARTING ADDRESS OF THE CODE:------------\n");
-    scanf("%d",&address);
+    scanf("%x",&address);
     printf("\n\n------------------AFTER ADDRESSING THE CODE IS:-------------------\n\n");
      f=fopen("assemblycode.txt","r");
     printf("ADDRESS\t");
