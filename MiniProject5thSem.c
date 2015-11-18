@@ -79,4 +79,37 @@ void main()
     fclose(f);
     length=adres[ctr-1]-adres[0];
     printf("\n\n\n\n--------------------------LENGTH OF THE PROGRAM:   0%x--------------------\n\n",length);
+printf("\n\n-------------------PRESS ENTER TO SEE OPTAB FOR THE MACHINE---------------------\n\n");
+    getch();
+    fop=fopen("optab.txt","r");
+    printf("\n\n-----------------------------OPTAB FOR THE MACHINE:-----------------------------\n\n");
+    while(c4 != EOF)
+    {
+        c4=getc(fop);
+        putchar(c4);
+    }
+    fclose(fop);
+    fsym=fopen("symtab.txt","w");
+    for(k=0;k<o-1;k++)
+    {
+        for(j=0;j<l-1;j++)
+        {
+            if(strcmp(operand[k].str,label[j].str)==0)
+            {
+                fprintf(fsym,"%s \t",operand[k].str);
+                fprintf(fsym,"%x \n",adres[j-1]);
+            }
+        }
+    }
+    fclose(fsym);
+    printf("\n\n-------------------PRESS ENTER TO SEE SYMTAB FOR THE MACHINE--------------------\n\n");
+    getch();
+    fsym=fopen("symtab.txt","r");
+    printf("\n\n---------------------------SYMTAB FOR THE MACHINE:------------------------------\n\n");
+    while(c5 != EOF)
+    {
+        c5=getc(fsym);
+        putchar(c5);
+    }
+    fclose(fsym);
 }
