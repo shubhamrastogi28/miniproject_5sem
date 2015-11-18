@@ -3,9 +3,9 @@
 #include<string.h>
 void main()
 {
-    FILE *fp;
-    int i,j;
-    char ch;
+    FILE *fp,*f;
+    int i,j,address;
+    char c,c2,ch;
     fp=fopen("mnemonics.txt","r");
     printf("------------------MNEMONICS THAT CAN BE USED FOR THE MACHINE:---------------\n\n");
     while(ch != EOF)
@@ -14,4 +14,30 @@ void main()
         putchar(ch);
     }
     fclose(fp);
+    f=fopen("assemblycode.txt","r");
+    printf("\n\n--------------------------ASSEMBLY CODE IS:----------------------\n\n");
+    while(c!=EOF)
+    {
+        c=getc(f);
+        putchar(c);
+    }
+    fclose(f);
+    printf("\n\n-----------------ENTER THE STARTING ADDRESS OF THE CODE:\n------------");
+    scanf("%d",&address);
+    printf("\n\nAFTER ADDRESSING THE CODE IS:\n\n");
+     f=fopen("assemblycode.txt","r");
+    printf("ADDRESS\t");
+   while(c2 != EOF)
+    {
+        c2=getc(f);
+        if(c2 == '\n')
+        {
+            printf("%c",c2);
+            printf("%d \t",address);
+            address=address+3;
+        }
+        else
+            printf("%c",c2);
+    }
+    fclose(f);
 }
