@@ -58,6 +58,7 @@ void main()
     i=0;
     printf("\n\n-----------------ENTER THE STARTING ADDRESS OF THE CODE:------------\n");
     scanf("%x",&address);
+    tempo=address;
     printf("\n\n------------------AFTER ADDRESSING THE CODE IS:-------------------\n\n");
      f=fopen("assemblycode.txt","r");
     printf("ADDRESS\t");
