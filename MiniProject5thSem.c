@@ -9,9 +9,9 @@ void main()
 {
     FILE *fp,*f,*fop,*fsym,*fob_prog,*ftext;
     seg add[20],label[20],mnemonik[20],operand[20],opr[10],sym[10];
-    int i,j,address,o=0,l=0,m=0,r,ctr,p,q,k;
-    int adres[20],length,op[10],sm[10];
-    char c,c2,c3,c4,c5,c6,c7,ch;
+    int i,j,address,o=0,l=0,m=0,r,ctr,p,q,k,d,tmp,t,txt=0,txt2;
+    int adres[20],length,op[10],sm[10],text[100];
+    char c,c2,c3,c4,c5,c6,c7,c8,c9,c10,ch,s[10],temp[10];
     printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
     getch();
     fp=fopen("mnemonics.txt","r");
@@ -132,4 +132,51 @@ void main()
     }
     q=i;
     fclose(fsym);
+    f=fopen("assemblycode.txt","r");
+    t=1;
+    while(c8 != EOF)
+    {
+      d=t%3;
+      switch(d)
+      {
+        case 0:fscanf(f,"%s",&temp);
+               for(tmp=0;tmp<q;tmp++)
+               {
+                   if(strcmp(temp,sym[tmp].str)==0)
+                   {
+                      text[txt]=sm[tmp];
+                      txt++;
+                   }
+               }
+               break;
+
+        case 2:fscanf(f,"%s",&temp);
+               if(strcmp(temp,"RWD")==0 || strcmp(temp,"RBT")==0)
+               {
+                text[txt]=-1;
+                txt++;
+               }
+               else
+               {
+                for(tmp=0;tmp<p;tmp++)
+                {
+                   if(strcmp(temp,opr[tmp].str)==0)
+                   {
+                      text[txt]=op[tmp];
+                      txt++;
+                   }
+                }
+               }
+               break;
+      }
+      t++;
+      c8=getc(f);
+    }
+    fclose(f);
+    ftext=fopen("textrecord.txt","w");
+    for(txt2=0;txt2<txt;txt2++)
+    {
+        fprintf(ftext,"%d",text[txt2]);
+    }
+    fclose(ftext);
 }
