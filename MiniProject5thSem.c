@@ -9,7 +9,7 @@ void main()
 {
     FILE *fp,*f,*fop,*fsym,*fob_prog,*ftext;
     seg add[20],label[20],mnemonik[20],operand[20],opr[10],sym[10];
-    int i,j,address,o=0,l=0,m=0,r,ctr,p,q;
+    int i,j,address,o=0,l=0,m=0,r,ctr,p,q,k;
     int adres[20],length,op[10],sm[10];
     char c,c2,c3,c4,c5,c6,c7,ch;
     printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
