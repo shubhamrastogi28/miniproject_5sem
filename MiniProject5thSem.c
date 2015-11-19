@@ -10,7 +10,7 @@ void main()
     FILE *fp,*f,*fop,*fsym,*fob_prog,*ftext;
     seg add[20],label[20],mnemonik[20],operand[20],opr[10],sym[10];
     int i,j,address,o=0,l=0,m=0,r,ctr,p,q,k,d,tmp,t,txt=0,txt2;
-    int adres[20],length,op[10],sm[10],text[100];
+    int adres[20],length,op[10],sm[10],text[100],tempo;
     char c,c2,c3,c4,c5,c6,c7,c8,c9,c10,ch,s[10],temp[10];
     printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
     getch();
@@ -179,4 +179,26 @@ void main()
         fprintf(ftext,"%d",text[txt2]);
     }
     fclose(ftext);
+     fob_prog=fopen("object_program.txt","w");
+    fprintf(fob_prog,"HEADER RECORD IS AS FOLLOWS:\n\nH^%s^00%x^0000%x\n\n",label[0].str,tempo,length);
+    fprintf(fob_prog,"TEXT RECORD IS AS FOLLOWS:\n\nT");
+    for(txt2=0;txt2<txt;txt2++)
+    {
+        if(txt2%2==0)
+            fprintf(fob_prog,"^");
+        fprintf(fob_prog,"%d",text[txt2]);
+    }
+    fprintf(fob_prog,"\n\nEND RECORD IS AS FOLLOWS:\n\nE^00%x",tempo);
+    fclose(fob_prog);
+
+    printf("\n\n---------------------PRESS ENTER TO SEE THE OBJECT PROGRAM----------------------\n\n");
+    getch();
+    fob_prog=fopen("object_program.txt","r");
+    printf("\n\n--------------------------OBJECT PROGRAM FOR THE CODE:--------------------------\n\n");
+    while(c9 != EOF)
+    {
+        c9=getc(fob_prog);
+        putchar(c9);
+    }
+    fclose(fob_prog);
 }
