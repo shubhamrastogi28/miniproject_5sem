@@ -32,7 +32,11 @@ void main()
         putchar(c);
     }
     fclose(f);
-     f=fopen("assemblycode.txt","r");
+    printf("\n\n--------------------ENTER THE STARTING ADDRESS OF THE CODE:---------------------\n\n");
+    scanf("%x",&address);
+    tempo=address;
+    adres[0]=address;
+    f=fopen("assemblycode.txt","r");
     i=1;
     while(c3 != EOF)
     {
@@ -55,10 +59,20 @@ void main()
       c3=getc(f);
     }
     fclose(f);
+     for(k=1;k<m-1;k++)
+    {
+        if(strcmp(mnemonik[k].str,"RWD")==0)
+        {
+            adres[k]=adres[k-1]+(3*(atoi(operand[k].str)));
+        }
+        else if(strcmp(mnemonik[k].str,"RBT")==0)
+        {
+            adres[k]=adres[k-1]+(atoi(operand[k].str));
+        }
+        else
+            adres[k]=adres[k-1]+3;
+    }
     i=0;
-    printf("\n\n-----------------ENTER THE STARTING ADDRESS OF THE CODE:------------\n");
-    scanf("%x",&address);
-    tempo=address;
     printf("\n\n------------------AFTER ADDRESSING THE CODE IS:-------------------\n\n");
      f=fopen("assemblycode.txt","r");
     printf("ADDRESS\t");
@@ -68,9 +82,7 @@ void main()
         if(c2 == '\n')
         {
             printf("%c",c2);
-            printf("%x \t",address);// %x IS USED FOR HEXADECIMAL
-            adres[i]=address;
-            address=address+3;
+            printf("%x \t",adres[i]);// %x IS USED FOR HEXADECIMAL
             i++;
         }
         else
@@ -174,24 +186,56 @@ void main()
       c8=getc(f);
     }
     fclose(f);
+     if(txt!=0)
+    {
+    LEN=txt;
+    i=LEN%20;
+    j=LEN/20;
+    k=0;
+    if(j!=0)
+    {
+    while(j!=0)
+    {
+        len[k]=30;
+        j--;
+        k++;
+    }
+    }
+    len[k]=i;
+    }
     ftext=fopen("textrecord.txt","w");
     for(txt2=0;txt2<txt;txt2++)
     {
         fprintf(ftext,"%d",text[txt2]);
     }
     fclose(ftext);
+    LOCCTR=0;
+    i=0;
      fob_prog=fopen("object_program.txt","w");
     fprintf(fob_prog,"HEADER RECORD IS AS FOLLOWS:\n\nH^%s^00%x^0000%x\n\n",label[0].str,tempo,length);
-    fprintf(fob_prog,"TEXT RECORD IS AS FOLLOWS:\n\nT");
+    fprintf(fob_prog,"TEXT RECORD IS AS FOLLOWS:\n\nT^00%x^%x",adres[LOCCTR],len[0]);
     for(txt2=0;txt2<txt;txt2++)
     {
+        if(text[txt2]!=-1)
+        {
+        if(txt2%20!=0 || txt2==0)
+        {
         if(txt2%2==0)
             fprintf(fob_prog,"^");
         fprintf(fob_prog,"%d",text[txt2]);
+        }
+        else if(txt2%20==0 || txt2!=0)
+        {
+            i++;
+            fprintf(fob_prog,"NEXT TEXT RECORD IS:\n\nT^00%x^%x",adres[10*i],len[i]);
+             if(txt2%2==0)
+            fprintf(fob_prog,"^");
+            fprintf(fob_prog,"%d",text[txt2]);
+        }
+        }
     }
     fprintf(fob_prog,"\n\nEND RECORD IS AS FOLLOWS:\n\nE^00%x",tempo);
     fclose(fob_prog);
-
     printf("\n\n---------------------PRESS ENTER TO SEE THE OBJECT PROGRAM----------------------\n\n");
     getch();
     fob_prog=fopen("object_program.txt","r");
