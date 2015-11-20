@@ -8,28 +8,28 @@ typedef struct segregate
 void main()
 {
     FILE *fp,*f,*fop,*fsym,*fob_prog,*ftext;
-    seg add[20],label[20],mnemonik[20],operand[20],opr[10],sym[10];
+    seg add[100],label[100],mnemonik[100],operand[100],opr[100],sym[100];
     int i,j,address,o=0,l=0,m=0,r,ctr,p,q,k,d,tmp,t,txt=0,txt2;
-    int adres[20],length,op[10],sm[10],text[100],tempo;
-    char c,c2,c3,c4,c5,c6,c7,c8,c9,c10,ch,s[10],temp[10];
+    int adres[100],length,op[100],sm[100],text[100],tempo,LOCCTR,LEN,val,val1,val2,len[10];
+    char c[10],s[10],temp[10];
     printf("--------------------------PRESS ENTER TO SEE MNEMONICS-------------------------\n\n");
     getch();
     fp=fopen("mnemonics.txt","r");
     printf("------------------MNEMONICS THAT CAN BE USED FOR THE MACHINE:---------------\n\n");
-    while(ch != EOF)
+    while(c[0] != EOF)
     {
-        ch=getc(fp);
-        putchar(ch);
+        c[0]=getc(fp);
+        putchar(c[0]);
     }
     fclose(fp);
     printf("\n\n---------------------PRESS ENTER TO SEE THE ASSEMBLY CODE:--------------------\n\n");
     getch();
     f=fopen("assemblycode.txt","r");
     printf("\n\n--------------------------ASSEMBLY CODE IS:----------------------\n\n");
-    while(c!=EOF)
+    while(c[1]!=EOF)
     {
-        c=getc(f);
-        putchar(c);
+        c[1]=getc(f);
+        putchar(c[1]);
     }
     fclose(f);
     printf("\n\n--------------------ENTER THE STARTING ADDRESS OF THE CODE:---------------------\n\n");
@@ -38,7 +38,7 @@ void main()
     adres[0]=address;
     f=fopen("assemblycode.txt","r");
     i=1;
-    while(c3 != EOF)
+    while(c[2] != EOF)
     {
       r=i%3;
       switch(r)
@@ -56,7 +56,7 @@ void main()
                break;
       }
       i++;
-      c3=getc(f);
+      c[2]=getc(f);
     }
     fclose(f);
      for(k=1;k<m-1;k++)
@@ -76,17 +76,17 @@ void main()
     printf("\n\n------------------AFTER ADDRESSING THE CODE IS:-------------------\n\n");
      f=fopen("assemblycode.txt","r");
     printf("ADDRESS\t");
-   while(c2 != EOF)
+   while(c[3] != EOF)
     {
-        c2=getc(f);
-        if(c2 == '\n')
+        c[3]=getc(f);
+        if(c[3] == '\n')
         {
-            printf("%c",c2);
+            printf("%c",c[3]);
             printf("%x \t",adres[i]);// %x IS USED FOR HEXADECIMAL
             i++;
         }
         else
-            printf("%c",c2);
+            printf("%c",c[3]);
     }
     ctr=i;
     fclose(f);
@@ -96,10 +96,10 @@ void main()
     getch();
     fop=fopen("optab.txt","r");
     printf("\n\n-----------------------------OPTAB FOR THE MACHINE:-----------------------------\n\n");
-    while(c4 != EOF)
+    while(c[4] != EOF)
     {
-        c4=getc(fop);
-        putchar(c4);
+        c[4]=getc(fop);
+        putchar(c[4]);
     }
     fclose(fop);
     fsym=fopen("symtab.txt","w");
@@ -119,35 +119,35 @@ void main()
     getch();
     fsym=fopen("symtab.txt","r");
     printf("\n\n---------------------------SYMTAB FOR THE MACHINE:------------------------------\n\n");
-    while(c5 != EOF)
+    while(c[5] != EOF)
     {
-        c5=getc(fsym);
-        putchar(c5);
+        c[5]=getc(fsym);
+        putchar(c[5]);
     }
     fclose(fsym);
     fop=fopen("optab.txt","r");
     i=0;
-    while(c6!=EOF)
+    while(c[6]!=EOF)
     {
         fscanf(fop,"%s%d",&opr[i].str,&op[i]);
         i++;
-        c6=getc(fop);
+        c[6]=getc(fop);
     }
     p=i;
     fclose(fop);
     fsym=fopen("symtab.txt","r");
     i=0;
-    while(c7!=EOF)
+    while(c[7]!=EOF)
     {
         fscanf(fop,"%s%d",&sym[i].str,&sm[i]);
         i++;
-        c7=getc(fsym);
+        c[7]=getc(fsym);
     }
     q=i;
     fclose(fsym);
     f=fopen("assemblycode.txt","r");
     t=1;
-    while(c8 != EOF)
+    while(c[8] != EOF)
     {
       d=t%3;
       switch(d)
@@ -183,7 +183,7 @@ void main()
                break;
       }
       t++;
-      c8=getc(f);
+      c[8]=getc(f);
     }
     fclose(f);
      if(txt!=0)
@@ -240,10 +240,10 @@ void main()
     getch();
     fob_prog=fopen("object_program.txt","r");
     printf("\n\n--------------------------OBJECT PROGRAM FOR THE CODE:--------------------------\n\n");
-    while(c9 != EOF)
+    while(c[9] != EOF)
     {
-        c9=getc(fob_prog);
-        putchar(c9);
+        c[9]=getc(fob_prog);
+        putchar(c[9]);
     }
     fclose(fob_prog);
 }
