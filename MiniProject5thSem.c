@@ -162,7 +162,8 @@ void main()
                    }
                }
                break;
-
+        case 1:fscanf(f,"%s",&temp);
+               break;
         case 2:fscanf(f,"%s",&temp);
                if(strcmp(temp,"RWD")==0 || strcmp(temp,"RBT")==0)
                {
